@@ -14,10 +14,9 @@ import javax.swing.table.DefaultTableModel;
  * @author sergi
  */
 public class Alumnos extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Alumnos
-     */
+    String usuario=Log.getUsuario();
+    String password=Log.getPassword();
+    
     public Alumnos() {
         initComponents();
         txtId.setVisible(false);
@@ -53,6 +52,8 @@ public class Alumnos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Alumnos");
+        setPreferredSize(new java.awt.Dimension(1080, 700));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel1.setText("Alumnos");
@@ -192,7 +193,7 @@ public class Alumnos extends javax.swing.JFrame {
                             .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnGuardar)
                         .addGap(27, 27, 27)
@@ -233,7 +234,7 @@ public class Alumnos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnModificar)
@@ -249,23 +250,23 @@ public class Alumnos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -298,9 +299,11 @@ public class Alumnos extends javax.swing.JFrame {
         }else if(rbMujer.isSelected()== true){
             sexo="M";
         }
-        
+        String user=usuario;
+        String pass=password;
+;
         try{
-           Connection con= Conexion.getConexion();
+           Connection con= Conexion.getConexion(user, pass); //aquí modificar contructor de conexion y meterle los dos parametros con user y pass
            PreparedStatement ps=con.prepareStatement("INSERT INTO ALUMNOS (MATRICULA, NOMBRE, EDAD, SEXO, EMAIL, ACTIVO) VALUES (?,?,?,?,?,?)");
            ps.setString(1, matricula);
            ps.setString(2, nombre);
@@ -332,6 +335,9 @@ public class Alumnos extends javax.swing.JFrame {
 
     /*Evento que muestra los datos en los campos al clickar con el ratón sobre una fila determinada de los resultados*/
     private void tblAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlumnosMouseClicked
+        String user=usuario;
+        String pass=password;
+        
         try{
             int fila = tblAlumnos.getSelectedRow(); //Obtiene el nº de fila de la fila seleccionada por nosotros al clickar sobre ella
             int id = (int) tblAlumnos.getValueAt(fila, 0); //Obtiene el ID del registro de la fila seleccionada
@@ -339,7 +345,7 @@ public class Alumnos extends javax.swing.JFrame {
             PreparedStatement ps;
             ResultSet rs;
             
-            Connection conn =Conexion.getConexion();
+            Connection conn =Conexion.getConexion(user, pass);
             ps=conn.prepareStatement("SELECT ID, MATRICULA, NOMBRE, EDAD, SEXO, EMAIL FROM ALUMNOS WHERE ID=?");
             ps.setInt(1, id); //En el campo ID(oculto) coloca el ID guardado anteriormente
             rs=ps.executeQuery(); //Ejecuta la consulta
@@ -381,9 +387,11 @@ public class Alumnos extends javax.swing.JFrame {
         ResultSet rs;
         ResultSetMetaData rsmd;
         int ncolumnas;
+        String user=usuario;
+        String pass=password;
         
         try{
-            Connection conn = Conexion.getConexion();
+            Connection conn = Conexion.getConexion(user, pass);
             ps=conn.prepareStatement("SELECT ID, MATRICULA, NOMBRE, SEXO, EMAIL FROM ALUMNOS"); //Guardamos en la PreparedStatement la sentencia a ejecutar
             rs=ps.executeQuery(); //Ejecutamos la consulta y la guardamos en el ResultSet
             rsmd=rs.getMetaData(); //Guardamos los metadatos de la consulta realizada en un objeto de tipo ResultSetMetaData para poder consultar información sobre los datos de la consulta
