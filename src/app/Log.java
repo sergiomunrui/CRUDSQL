@@ -10,12 +10,14 @@ import javax.swing.JOptionPane;
  */
 public class Log extends javax.swing.JFrame {
     
+    /*Declaración de variables estaticas o de clase*/
     private static String usuario;
     private static String password;
 
     
     public Log() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     
@@ -39,6 +41,7 @@ public class Log extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        setSize(new java.awt.Dimension(1080, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
@@ -66,9 +69,13 @@ public class Log extends javax.swing.JFrame {
         });
         bg.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 280, 33));
 
-        txtPass.setText("jPasswordField1");
         txtPass.setBorder(null);
         txtPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
         bg.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, 280, 30));
 
         lblUsuario.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
@@ -118,20 +125,22 @@ public class Log extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
+    /*Método que se ejecuta al pulsar el botón de "Iniciar Sesión"*/
     private void lblInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMouseClicked
         usuario=txtUsuario.getText();
         password=txtPass.getText();
-        boolean conectado = false;
+        boolean conectado = false; //Declaración e inicialización de variable booleana
+                                   // para comprobar que la conexión ha tenido éxito
         try{
            Connection con=Conexion.getConexion(usuario, password);
-           conectado=con.isValid(1);
-          }catch(Exception e){
+           conectado=con.isValid(1); //Comprobación de que la conexión es válida
+          }catch(Exception e){ //Excepción que captura si el usuario o contraseña no son correctos
               conectado=false;
               JOptionPane.showMessageDialog(null, "El usuario o contraseña es incorrecto");
-              e.printStackTrace();
-              
+              e.printStackTrace(); 
           } 
-        
+        /*Si hay conexión mostramos mensaje de bienvenida, inicializamos la segunda
+        pantalla, la hacemos visible y cerramos la actual para no gastar recursos*/
         if(conectado){
             JOptionPane.showMessageDialog(null, "Bienvenido");
             Alumnos alumno=new Alumnos();
@@ -139,6 +148,10 @@ public class Log extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_lblInicioMouseClicked
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassActionPerformed
 
     
     public static void main(String args[]) {
@@ -173,6 +186,8 @@ public class Log extends javax.swing.JFrame {
         });
     }
     
+    /*Métodos creados para ser usados en la segunda clase y obtener el usuario y
+    contraseña introducidos para realizar la conexión*/
     public static String getUsuario(){
         return usuario;
     }
