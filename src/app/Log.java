@@ -36,7 +36,7 @@ public class Log extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         btnInicio = new javax.swing.JPanel();
         lblInicio = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         bgCity = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,10 +108,10 @@ public class Log extends javax.swing.JFrame {
 
         bg.add(btnInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 572, -1, -1));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(40, 40));
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(621, 26, 460, 150));
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
+        lblLogo.setPreferredSize(new java.awt.Dimension(40, 40));
+        bg.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(621, 26, 460, 150));
 
         bgCity.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/city_vector.jpg"))); // NOI18N
         bg.add(bgCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 460, 700));
@@ -200,10 +200,10 @@ public class Log extends javax.swing.JFrame {
     private javax.swing.JPanel bg;
     private javax.swing.JLabel bgCity;
     private javax.swing.JPanel btnInicio;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblInicio;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblPass;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblUsuario;

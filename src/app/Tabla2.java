@@ -12,12 +12,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
 public class Tabla2 extends JTable {
-
-    private Font font;
-    private int horizontalAlignment;
-    
+  
     public Tabla2(){
-        getTableHeader().setDefaultRenderer(new Tabla2Header()); //Obtenemos instancia del header de la tabla por defecto para sobrescribirlo
+        getTableHeader().setDefaultRenderer(new Tabla2Header()); //Obtenemos instancia del header de la tabla por defecto para sobrescribirlo    
     }
 
     private class Tabla2Header extends DefaultTableCellRenderer{
@@ -32,11 +29,15 @@ public class Tabla2 extends JTable {
         setPreferredSize(new Dimension(0,30));
         
         return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-    }
-        
+        }   
     }
     
-
-    
+    /*Método para proporcionar el ancho a las 5 columnas recibe objeto de tipo Tabla2*/
+    public static void anchoColumnas(Tabla2 tabla){
+        int [] anchos={30, 120, 200, 50, 200}; //Creamos un array de 5 elementos donde guardamos su ancho en píxeles
+        for(int i=0; i<tabla.getColumnCount();i++){ //Bucle For que obtiene de la tabla la columna concreta y la proporciona el ancho obtenido del array anterior
+            tabla.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+        }
+    }
 
 }
