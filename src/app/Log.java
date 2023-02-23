@@ -1,6 +1,8 @@
 
 package app;
 
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -38,8 +40,12 @@ public class Log extends javax.swing.JFrame {
         lblInicio = new javax.swing.JLabel();
         lblLogo = new javax.swing.JLabel();
         bgCity = new javax.swing.JLabel();
+        jpBarraSuperior = new javax.swing.JPanel();
+        jpCerrar = new javax.swing.JPanel();
+        lblCerrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,18 +68,13 @@ public class Log extends javax.swing.JFrame {
         txtUsuario.setBorder(null);
         txtUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txtUsuario.setHighlighter(null);
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
         bg.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 280, 33));
 
         txtPass.setBorder(null);
         txtPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        txtPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPassActionPerformed(evt);
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPassKeyPressed(evt);
             }
         });
         bg.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, 280, 30));
@@ -92,6 +93,15 @@ public class Log extends javax.swing.JFrame {
         lblInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblInicioMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblInicioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblInicioMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblInicioMousePressed(evt);
             }
         });
 
@@ -116,14 +126,60 @@ public class Log extends javax.swing.JFrame {
         bgCity.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/city_vector.jpg"))); // NOI18N
         bg.add(bgCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 0, 460, 700));
 
+        jpBarraSuperior.setBackground(new java.awt.Color(255, 255, 255));
+
+        jpCerrar.setBackground(new java.awt.Color(240, 240, 240));
+
+        lblCerrar.setFont(new java.awt.Font("sansserif", 1, 20)); // NOI18N
+        lblCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCerrar.setText("X");
+        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblCerrarMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpCerrarLayout = new javax.swing.GroupLayout(jpCerrar);
+        jpCerrar.setLayout(jpCerrarLayout);
+        jpCerrarLayout.setHorizontalGroup(
+            jpCerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+        );
+        jpCerrarLayout.setVerticalGroup(
+            jpCerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jpBarraSuperiorLayout = new javax.swing.GroupLayout(jpBarraSuperior);
+        jpBarraSuperior.setLayout(jpBarraSuperiorLayout);
+        jpBarraSuperiorLayout.setHorizontalGroup(
+            jpBarraSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpBarraSuperiorLayout.createSequentialGroup()
+                .addComponent(jpCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1025, Short.MAX_VALUE))
+        );
+        jpBarraSuperiorLayout.setVerticalGroup(
+            jpBarraSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpBarraSuperiorLayout.createSequentialGroup()
+                .addComponent(jpCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        bg.add(jpBarraSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 40));
+
         getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        
-    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     /*Método que se ejecuta al pulsar el botón de "Iniciar Sesión"*/
     private void lblInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMouseClicked
@@ -149,9 +205,61 @@ public class Log extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblInicioMouseClicked
 
-    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPassActionPerformed
+   /*Evento que se ejecuta al pulsar la tecla Enter una vez escrito elcampo password*/
+    private void txtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){ //Si el nº de código de la tecla pulsada coincide con el nº de código de la tecla Enter
+            usuario=txtUsuario.getText();
+            password=txtPass.getText();
+            boolean conectado = false; //Declaración e inicialización de variable booleana
+                                   // para comprobar que la conexión ha tenido éxito
+            try{
+             Connection con=Conexion.getConexion(usuario, password);
+             conectado=con.isValid(1); //Comprobación de que la conexión es válida
+            }catch(Exception e){ //Excepción que captura si el usuario o contraseña no son correctos
+                conectado=false;
+                JOptionPane.showMessageDialog(null, "El usuario o contraseña es incorrecto");
+                e.printStackTrace(); 
+            } 
+            /*Si hay conexión mostramos mensaje de bienvenida, inicializamos la segunda
+            pantalla, la hacemos visible y cerramos la actual para no gastar recursos*/
+            if(conectado){
+                JOptionPane.showMessageDialog(null, "Bienvenido");
+                Alumnos alumno=new Alumnos();
+                alumno.setVisible(true);
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_txtPassKeyPressed
+
+    private void lblInicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMousePressed
+        btnInicio.setBackground(new Color(10, 93, 173));
+    }//GEN-LAST:event_lblInicioMousePressed
+
+    private void lblInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMouseEntered
+        btnInicio.setBackground(new Color(0, 139, 207));
+    }//GEN-LAST:event_lblInicioMouseEntered
+
+    private void lblInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblInicioMouseExited
+        btnInicio.setBackground(new Color(0, 110, 207));
+    }//GEN-LAST:event_lblInicioMouseExited
+
+    private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void lblCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseEntered
+        jpCerrar.setBackground(new Color (232, 17, 35));
+    }//GEN-LAST:event_lblCerrarMouseEntered
+
+    private void lblCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseExited
+        jpCerrar.setBackground(new Color (240, 240, 240));
+        lblCerrar.setForeground(new Color (0, 0, 0));
+    }//GEN-LAST:event_lblCerrarMouseExited
+
+    private void lblCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMousePressed
+        jpCerrar.setBackground(new Color (181, 30, 25));
+        lblCerrar.setForeground(new Color (255, 255, 255));
+    }//GEN-LAST:event_lblCerrarMousePressed
 
     
     public static void main(String args[]) {
@@ -202,6 +310,9 @@ public class Log extends javax.swing.JFrame {
     private javax.swing.JPanel btnInicio;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPanel jpBarraSuperior;
+    private javax.swing.JPanel jpCerrar;
+    private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblInicio;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblPass;
